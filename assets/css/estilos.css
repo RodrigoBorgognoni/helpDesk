@@ -8,14 +8,26 @@
     box-sizing: border-box;
 }
 
+/* TELA LOGIN */
 .card-login {
     padding: var(--padding-chamado);
-    width: 20rem;
     margin: var(--margin-auto);
-  }
+    width: 25rem;
+    min-width: 20rem;
+    max-width: 30rem;
+}
 
+@media (max-width: 767px) {
+    .card-login {
+        display: var(--flex);
+        justify-content: var(--center);
+        max-width: var(--media-width);
+    }
+}
+
+/* TELA CHAMADO */
 .card-chamado, .card-home {
     padding: var(--padding-chamado);
     width: var(--full-width);
-    margin:var(--margin-auto);
+    margin: var(--margin-auto);
 }

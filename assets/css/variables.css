@@ -1,13 +1,18 @@
 :root {
-    /* MARGINS AND PADDINGS*/
+    /* DISPLAY */
+    --flex: var(--flex);
+    --center: center;
     --full-width: 100%;
+    --media-width: 60%;
+
+    /* MARGINS AND PADDINGS*/
     --margin-auto: 0 auto;
     --margin-default: 0;
     --padding-default: 0;
     --padding-chamado: 1.6rem 0 0 0;
 
     /* TAMANHO FONTE */
-    --gutter: 18px;
+    --gutter: 16px;
     --half-gutter: calc(var(--gutter) / 2);
     --quarter-gutter: calc(var(--gutter) / 4);
     --double-gutter: calc(var(--gutter) * 2);
