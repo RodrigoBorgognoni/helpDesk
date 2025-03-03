@@ -1,0 +1,21 @@
+@import url('variables.css');
+
+* {
+    font-family: 'Roboto', sans-serif;
+    font-size: var(--gutter);
+    margin: var(--margin-default);
+    padding: var(--padding-default);
+    box-sizing: border-box;
+}
+
+.card-login {
+    padding: var(--padding-chamado);
+    width: 20rem;
+    margin: var(--margin-auto);
+  }
+
+.card-chamado {
+    padding: var(--padding-chamado);
+    width: var(--full-width);
+    margin:var(--margin-auto);
+}
