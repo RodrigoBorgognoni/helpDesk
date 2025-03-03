@@ -14,7 +14,7 @@
     margin: var(--margin-auto);
   }
 
-.card-chamado {
+.card-chamado, .card-home {
     padding: var(--padding-chamado);
     width: var(--full-width);
     margin:var(--margin-auto);
