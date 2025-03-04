@@ -9,3 +9,6 @@
 
     <link rel="icon" href="/assets/img/logo.png" type="image/x-icon">
 </head>
+<?php
+include_once("assets/properties/error.php");
+?>

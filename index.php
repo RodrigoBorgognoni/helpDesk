@@ -26,10 +26,10 @@ include_once("header.php");
               </div>
 
               <?php
-              // Verifica se a índice Login (valida_login.php) foi setado e se é igual a erro
-              if (isset($_GET['Login']) && $_GET['Login'] == 'erro') { ?>
+              // Verifica se o índice Login foi setado na URL e se existe uma mensagem de erro correspondente
+              if (isset($_GET['Login']) && isset($errors[$_GET['Login']])) { ?>
                 <div class="text-danger">
-                  Usuário ou senha inválido(s)
+                  <?php echo $errors[$_GET['Login']]; ?>
                 </div>
               <?php } ?>
               <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>

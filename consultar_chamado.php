@@ -1,3 +1,6 @@
+<?php 
+  include_once("components/authSession.php");
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <?php
@@ -7,7 +10,6 @@ include_once("header.php");
   <?php 
     include_once("navbar.php");
   ?>
-
     <div class="container">
       <div class="row">
 

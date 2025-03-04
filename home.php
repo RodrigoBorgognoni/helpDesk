@@ -1,3 +1,6 @@
+<?php 
+include_once("components/authSession.php");
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <?php
