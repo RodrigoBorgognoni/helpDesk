@@ -17,7 +17,7 @@ include_once("components/header.php");
             Login
           </div>
           <div class="card-body">
-            <form action="/components/valida_login.php" method="post">
+            <form action="assets/auth/valida_login.php" method="post">
               <div class="form-group">
                 <input name="email" type="email" class="form-control" placeholder="E-mail">
               </div>

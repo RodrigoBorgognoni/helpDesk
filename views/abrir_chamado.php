@@ -1,5 +1,5 @@
 <?php 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/components/authSession.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/assets/auth/authSession.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/components/header.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
 ?>
