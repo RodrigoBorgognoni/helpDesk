@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <?php
-include_once("header.php");
+include_once("components/header.php");
 ?>
 
 <body>
   <?php
-  include_once("navbar.php");
+  include_once("components/navbar.php");
   ?>
 
   <div class="container">
@@ -26,7 +26,8 @@ include_once("header.php");
               </div>
 
               <?php
-              // Verifica se o índice Login foi setado na URL e se existe uma mensagem de erro correspondente
+              // Verifica se o índice Login foi setado na URL atravé de GET ex: header('Location: /index.php?Login=erro');
+              //e se existe uma mensagem de erro correspondente em error.php
               if (isset($_GET['Login']) && isset($errors[$_GET['Login']])) { ?>
                 <div class="text-danger">
                   <?php echo $errors[$_GET['Login']]; ?>

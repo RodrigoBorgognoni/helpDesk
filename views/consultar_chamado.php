@@ -1,15 +1,11 @@
 <?php 
-  include_once("components/authSession.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . '/components/authSession.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/components/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
-<?php
-include_once("header.php");
-?>
-  <body>
-  <?php 
-    include_once("navbar.php");
-  ?>
+<body>
     <div class="container">
       <div class="row">
 

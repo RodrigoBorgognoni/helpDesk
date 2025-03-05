@@ -10,7 +10,7 @@ $usersApp = [
     ['email' => 'adm@teste.com.br', 'senha' => '123456'],
     ['email' => 'user@teste.com.br', 'senha' => 'abcd'],
 ];
-print_r($_POST);
+
 //Percorre o array de usuários
 foreach ($usersApp as $user) {
 
