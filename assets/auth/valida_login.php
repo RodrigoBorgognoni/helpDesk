@@ -25,6 +25,7 @@ if ($usuario_autenticado) {
     echo 'Usuário Autenticado';
     //Cria um índice 'autenticado' na sessão com valor de 'Sim'
     $_SESSION['autenticado'] = 'SIM';
+    header('Location: /views/home.php');
 } else {
     $_SESSION['autenticado'] = 'NAO';
     // Se a autenticação for falsa, redireciona para a página de login com erro (superglobal GET)
