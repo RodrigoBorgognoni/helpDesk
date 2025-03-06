@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
 <?php
 include_once("components/header.php");
+include_once("components/navbar.php");
 ?>
-
+<!DOCTYPE html>
+<html lang="pt-BR">
 <body>
-  <?php
-  include_once("components/navbar.php");
-  ?>
 
   <div class="container">
     <div class="row">
