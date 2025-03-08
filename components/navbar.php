@@ -8,7 +8,7 @@
     if (basename($_SERVER['PHP_SELF']) != 'index.php') {
         echo '<ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="/assets/auth/logoff.php"><img src="/assets/styles/img/sair.png" alt="sair" width="30" height="30"></a>
+            <a class="nav-link" href="/components/auth/logoff.php"><img src="/assets/styles/img/sair.png" alt="sair" width="30" height="30"></a>
         </ul>';
     }
     ?>
