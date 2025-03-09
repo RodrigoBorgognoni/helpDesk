@@ -45,5 +45,5 @@ npm-debug.log
 jsconfig.json
 
 # files
-.pdf
-.txt
+*.pdf
+*.txt
