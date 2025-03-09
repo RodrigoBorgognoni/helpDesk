@@ -18,6 +18,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
 
                     <div class="card-body">
                         <?php
+                        try {
                             // Diretório onde os arquivos de chamados estão armazenados
                             $dir = $_SERVER['DOCUMENT_ROOT'] . '/arquivos/chamados/';
                             // Obtém todos os arquivos de chamados no diretório
@@ -48,14 +49,19 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
                                     $descricao = $chamado[2];
                                 }
                         ?>
-                            <div class='card mb-3 bg-light'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'><?php echo htmlspecialchars($titulo) ?></h5>
-                                    <h6 class='card-subtitle mb-2 text-muted'><?php echo htmlspecialchars($categoria) ?></h6>
-                                    <p class='card-text'><?php echo htmlspecialchars($descricao) ?></p>
+                                <div class='card mb-3 bg-light'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title'><?php echo htmlspecialchars($titulo) ?></h5>
+                                        <h6 class='card-subtitle mb-2 text-muted'><?php echo htmlspecialchars($categoria) ?></h6>
+                                        <p class='card-text'><?php echo htmlspecialchars($descricao) ?></p>
+                                    </div>
                                 </div>
-                            </div>
                         <?php
+                            }
+                        } catch (Exception $e) {
+                            echo '<div class="alert alert-danger" role="alert">';
+                            echo 'Erro: ' . htmlspecialchars($e->getMessage());
+                            echo '</div>';
                         }
                         ?>
 
