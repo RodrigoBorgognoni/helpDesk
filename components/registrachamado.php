@@ -3,7 +3,6 @@ session_start();
 
 // Define o fuso horário para América/São Paulo
 date_default_timezone_set('America/Sao_Paulo');
-
 try {
     // Gera o timestamp
     $timestamp = date('Y-m-d_H-i-s');
@@ -18,11 +17,14 @@ try {
 
     //função para abrir um arquivo, caso não exista, será criado
     $arquivo = fopen($dir . 'chamado_' . $timestamp . '.txt', 'a'); //https://www.php.net/manual/en/function.fopen.php
-
+    if (!$arquivo) {
+        throw new Exception('Falha ao abrir o arquivo: ' . $dir . 'chamado_' . $timestamp . '.txt');
+    }
 
     //função implode para juntar os valores do array em uma string delimitada por | e PHP_EOL para pular linha
     //e str_replace para substituir o caractere | por espaço no array $_POST
-    $texto = implode(' | ', str_replace('|', ' ', $_POST)) . PHP_EOL;
+    //$_SESSION['id'] para atribuir o ID do usuário que cadastrou o chamado
+    $texto = $_SESSION['id'] . ' | ' . implode(' | ', str_replace('|', ' ', $_POST)) . PHP_EOL;
 
     if ($arquivo) {
         //escreve no arquivo

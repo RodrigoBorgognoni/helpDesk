@@ -42,11 +42,11 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
 
                                 $conteudo = file_get_contents($arquivo); //file_get_contents — Lê todo o conteúdo de um arquivo em string
                                 $chamado = explode(' | ', $conteudo);
-                                // 3 porque nosso formulário passa apenas 3 posições, se tiver mais, é porque tem algo errado
-                                if (count($chamado) == 3) {
-                                    $titulo = $chamado[0];
-                                    $categoria = $chamado[1];
-                                    $descricao = $chamado[2];
+                                // 4 porque nosso formulário passa apenas 4 posições(id + 3 do form)
+                                if (count($chamado) == 4) {
+                                    $titulo = $chamado[1];
+                                    $categoria = $chamado[2];
+                                    $descricao = $chamado[3];
                                 }
                         ?>
                                 <div class='card mb-3 bg-light'>
