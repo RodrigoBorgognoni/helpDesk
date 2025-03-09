@@ -23,40 +23,57 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
                             $dir = $_SERVER['DOCUMENT_ROOT'] . '/arquivos/chamados/';
                             // Obtém todos os arquivos de chamados no diretório
                             //glob — Encontra arquivos que correspondam a um padrão, no caso, todos os arquivos que começam com chamado_
-                            $arquivo = glob($dir . 'chamado_*.txt');
+                            $arquivos = glob($dir . 'chamado_*.txt');
 
                             /* 
-                            se os chamados estivessem em um único arquivo, poderia ser utilizado feof para ler o arquivo até o final
-                             while (!feof($arquivo)) {
-                             fgets($arquivo); // fgets() lê caracteres da posição atual do fluxo até e incluindo o primeiro caractere de nova linha
-                            } 
-                            */
+                                se os chamados estivessem em um único arquivo, poderia ser utilizado feof para ler o arquivo até o final
+                                while (!feof($arquivo)) {
+                                fgets($arquivo); // fgets() lê caracteres da posição atual do fluxo até e incluindo o primeiro caractere de nova linha
+                                } 
+                                */
 
                             // Função de comparação para ordenar os arquivos por data de criação em ordem decrescente
-                            usort($arquivo, function ($dataAntiga, $dataNova) {
+                            usort($arquivos, function ($dataAntiga, $dataNova) {
                                 // filemtime() retorna o timestamp da última modificação de um arquivo
                                 return filemtime($dataNova) - filemtime($dataAntiga);
                             });
 
-                            foreach ($arquivo as $arquivo) {
+                            foreach ($arquivos as $arquivo) {
+                                try {
+                                    $conteudo = file_get_contents($arquivo);
+                                    if ($conteudo === false) {
+                                        throw new Exception('Falha ao ler o arquivo: ' . $arquivo);
+                                    }
 
-                                $conteudo = file_get_contents($arquivo); //file_get_contents — Lê todo o conteúdo de um arquivo em string
-                                $chamado = explode(' | ', $conteudo);
-                                // 4 porque nosso formulário passa apenas 4 posições(id + 3 do form)
-                                if (count($chamado) == 4) {
-                                    $titulo = $chamado[1];
-                                    $categoria = $chamado[2];
-                                    $descricao = $chamado[3];
-                                }
+                                    $chamado = explode(' | ', $conteudo);
+
+                                    // Verifica se o usuário tem permissão para ver o chamado
+                                    $temPermissao = ($_SESSION['tipoPerfil'] == 'usuário' && $_SESSION['id'] == $chamado[0]) ? false : true;
+                                    if (!$temPermissao) {
+                                        continue;
+                                    }
+
+                                    if (count($chamado) == 4) {
+                                        $id = $chamado[0];
+                                        $titulo = $chamado[1];
+                                        $categoria = $chamado[2];
+                                        $descricao = $chamado[3];
+
                         ?>
-                                <div class='card mb-3 bg-light'>
-                                    <div class='card-body'>
-                                        <h5 class='card-title'><?php echo htmlspecialchars($titulo) ?></h5>
-                                        <h6 class='card-subtitle mb-2 text-muted'><?php echo htmlspecialchars($categoria) ?></h6>
-                                        <p class='card-text'><?php echo htmlspecialchars($descricao) ?></p>
-                                    </div>
-                                </div>
+                                        <div class='card mb-3 bg-light'>
+                                            <div class='card-body'>
+                                                <h5 class='card-title'><?php echo htmlspecialchars($titulo) ?></h5>
+                                                <h6 class='card-subtitle mb-2 text-muted'><?php echo htmlspecialchars($categoria) ?></h6>
+                                                <p class='card-text'><?php echo htmlspecialchars($descricao) ?></p>
+                                            </div>
+                                        </div>
                         <?php
+                                    }
+                                } catch (Exception $e) {
+                                    echo '<div class="alert alert-danger" role="alert">';
+                                    echo 'Erro ao processar o arquivo: ' . htmlspecialchars($e->getMessage());
+                                    echo '</div>';
+                                }
                             }
                         } catch (Exception $e) {
                             echo '<div class="alert alert-danger" role="alert">';
@@ -64,7 +81,6 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
                             echo '</div>';
                         }
                         ?>
-
                         <div class="row mt-5">
                             <div class="col-6">
                                 <a class="btn btn-lg btn-warning btn-block" href="home.php">Voltar</a>
