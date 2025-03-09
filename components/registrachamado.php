@@ -8,7 +8,7 @@ date_default_timezone_set('America/Sao_Paulo');
 $timestamp = date('Y-m-d_H-i-s');
 
 //função para abrir um arquivo, caso não exista, será criado
-$arquivo = fopen(__DIR__ . '/../arquivos/chamados/chamado_' . $timestamp . '.txt', 'a'); //https://www.php.net/manual/en/function.fopen.php
+$arquivo = fopen($_SERVER['DOCUMENT_ROOT'] . '/arquivos/chamados/chamado_' . $timestamp . '.txt', 'a'); //https://www.php.net/manual/en/function.fopen.php
 
 
 //função implode para juntar os valores do array em uma string delimitada por | e PHP_EOL para pular linha
