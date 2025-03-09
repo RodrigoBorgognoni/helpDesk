@@ -43,3 +43,7 @@ npm-debug.log
 .idea/
 .vscode/
 jsconfig.json
+
+# files
+.pdf
+.txt

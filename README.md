@@ -4,7 +4,9 @@
 _Create our own Help Desk App with:_
 * Modular components
 * User autentication
-* Sessions
+* Session start/destroy
+* Creation of tasks
+* Access tasks created
 
 ## Used technologies:
 * HTML
