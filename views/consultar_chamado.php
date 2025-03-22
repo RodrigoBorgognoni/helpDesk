@@ -18,9 +18,6 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
 
                     <div class="card-body">
                         <?php
-                        echo '<pre>'; 
-                            print_r($_SESSION); 
-                        echo '</pre>';
                         try {
                             // Diretório onde os arquivos de chamados estão armazenados
                             $dir = $_SERVER['DOCUMENT_ROOT'] . '/arquivos/chamados/';
@@ -28,35 +25,31 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
                             //glob — Encontra arquivos que correspondam a um padrão, no caso, todos os arquivos que começam com chamado_
                             $arquivos = glob($dir . 'chamado_*.txt');
 
-                            /* 
-                                se os chamados estivessem em um único arquivo, poderia ser utilizado feof para ler o arquivo até o final
-                                while (!feof($arquivo)) {
-                                fgets($arquivo); // fgets() lê caracteres da posição atual do fluxo até e incluindo o primeiro caractere de nova linha
-                                } 
-                                */
+                            //Verificamos quais arquivos são permitidos para o usuário logado
+                            $arquivosPermitidos = array_filter($arquivos, function ($arquivo) {
+                                $conteudo = file_get_contents($arquivo);
+                                if ($conteudo === false) {
+                                    throw new Exception('Falha ao ler o arquivo: ' . $arquivo);
+                                }
+
+                                //Divide o conteúdo do arquivo em um array
+                                $chamado = explode(' | ', $conteudo);
+
+                                // Verifica permissão fora do foreach para performance
+                                return ($_SESSION['tipoPerfil'] === 'Admin') || ($_SESSION['tipoPerfil'] === 'usuário' && $_SESSION['id'] == $chamado[0]);
+                            });
 
                             // Função de comparação para ordenar os arquivos por data de criação em ordem decrescente
-                            usort($arquivos, function ($dataAntiga, $dataNova) {
+                            usort($arquivosPermitidos, function ($dataAntiga, $dataNova) {
                                 // filemtime() retorna o timestamp da última modificação de um arquivo
                                 return filemtime($dataNova) - filemtime($dataAntiga);
                             });
 
-                            foreach ($arquivos as $arquivo) {
+                            // Percorre os arquivos permitidos com $arquivosPermitidos
+                            foreach ($arquivosPermitidos as $arquivo) {
                                 try {
                                     $conteudo = file_get_contents($arquivo);
-                                    if ($conteudo === false) {
-                                        throw new Exception('Falha ao ler o arquivo: ' . $arquivo);
-                                    }
-
                                     $chamado = explode(' | ', $conteudo);
-
-                                    // Verifica se o usuário tem permissão para ver o chamado
-                                    $temPermissao = ($_SESSION['tipoPerfil'] === 'usuário' && $_SESSION['id'] == $chamado[0]) ? true : false;
-
-                                    //verifica se o usuário não tem permissão
-                                    if (!$temPermissao) {
-                                        continue;
-                                    }
 
                                     if (count($chamado) == 4) {
                                         $id = $chamado[0];
