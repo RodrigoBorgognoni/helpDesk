@@ -18,6 +18,9 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
 
                     <div class="card-body">
                         <?php
+                        echo '<pre>'; 
+                            print_r($_SESSION); 
+                        echo '</pre>';
                         try {
                             // Diretório onde os arquivos de chamados estão armazenados
                             $dir = $_SERVER['DOCUMENT_ROOT'] . '/arquivos/chamados/';
@@ -48,7 +51,9 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/components/navbar.php');
                                     $chamado = explode(' | ', $conteudo);
 
                                     // Verifica se o usuário tem permissão para ver o chamado
-                                    $temPermissao = ($_SESSION['tipoPerfil'] == 'usuário' && $_SESSION['id'] == $chamado[0]) ? false : true;
+                                    $temPermissao = ($_SESSION['tipoPerfil'] === 'usuário' && $_SESSION['id'] == $chamado[0]) ? true : false;
+
+                                    //verifica se o usuário não tem permissão
                                     if (!$temPermissao) {
                                         continue;
                                     }
